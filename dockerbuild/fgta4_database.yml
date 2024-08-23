@@ -1,0 +1,31 @@
+version: '3.9'
+
+services:
+
+  fgta4_database:
+    image: mariadb_10_6               # beri nama image hasil build
+    container_name: fgta4_database      # beri nama container
+    hostname: fgta4_database            # beri nama hostname
+    ports:
+      - 3306:3306
+    networks:
+      - devnetwork
+    environment:
+      - MARIADB_ALLOW_EMPTY_ROOT_PASSWORD=yes
+      - MARIADB_ROOT_PASSWORD=
+    volumes:
+      - fgtadbdata:/var/lib/mysql
+      - ./../server/backup:/var/database/backup
+      - ./../server/scripts:/var/database/scripts
+      - ./../server/logs:/var/database/logs    
+    working_dir: /var/database/scripts
+
+networks:
+  devnetwork:
+    name: devnetwork
+    external: true
+
+volumes:
+  fgtadbdata:
+    name: fgtadbdata
+    external: true
