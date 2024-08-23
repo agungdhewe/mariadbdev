@@ -1,3 +1,3 @@
 #!/bin/bash
 
-docker compose -f ./dockerbuild/fgta4_database.yml down
+docker compose -f ./dockerbuild/mariadbdev.yml down
